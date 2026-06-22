@@ -362,7 +362,7 @@
             <button class="modal-close" id="closeModal">&times;</button>
             <h3>Demander une démo</h3>
             <p>Remplissez ce formulaire et l'équipe SquareLinks vous recontactera sous 24h.</p>
-            <form onsubmit="event.preventDefault(); alert('Merci ! Votre demande a bien été envoyée à contact@squarelinks.immo.'); document.getElementById('contactModal').classList.remove('active');">
+            <form id="contactForm">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="prenom">Prénom</label>
@@ -391,8 +391,12 @@
                     <label for="lots">Nombre de lots invendus estimé</label>
                     <input type="number" id="lots" class="form-control" placeholder="Ex: 5">
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Envoyer ma demande</button>
+                <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Envoyer ma demande</button>
             </form>
+            <div id="formSuccess" style="display:none; text-align:center; padding: 20px 0;">
+                <p style="font-size: 18px; font-weight: 700; margin-bottom: 8px;">Merci !</p>
+                <p style="color: var(--grey-olive);">Votre demande a bien été envoyée. L'équipe SquareLinks vous recontactera sous 24h.</p>
+            </div>
         </div>
     </div>
 
@@ -427,6 +431,37 @@
             if (e.target === modal) {
                 modal.classList.remove('active');
             }
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.textContent = 'Envoi en cours...';
+            try {
+                await fetch('https://n8n.paire.ovh/webhook/contact-squarelinks', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        prenom: document.getElementById('prenom').value,
+                        nom: document.getElementById('nom').value,
+                        entreprise: document.getElementById('entreprise').value,
+                        email: document.getElementById('email').value,
+                        telephone: document.getElementById('telephone').value,
+                        lots: document.getElementById('lots').value
+                    })
+                });
+            } catch (err) {}
+            document.getElementById('contactForm').style.display = 'none';
+            document.getElementById('formSuccess').style.display = 'block';
+            setTimeout(() => {
+                modal.classList.remove('active');
+                document.getElementById('contactForm').reset();
+                document.getElementById('contactForm').style.display = 'block';
+                document.getElementById('formSuccess').style.display = 'none';
+                btn.disabled = false;
+                btn.textContent = 'Envoyer ma demande';
+            }, 3000);
         });
     </script>
 </body>
