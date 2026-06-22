@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SquareLinks - Promoteurs, accélérez vos fins de programmes !</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --onyx: #111111;
+            --carbon-black: #1C1C1E;
+            --grey-olive: #9B9B9B;
+            --alabaster-grey-1: #E0E0E0;
+            --alabaster-grey-2: #E8E8E6;
+            --white-smoke: #F5F4F2;
+            --ivory: #F0F6E8;
+            --lime-green: #C6F135;
+            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--onyx);
+            background-color: var(--white-smoke);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        section { padding: 100px 24px; display: block; width: 100%; }
+
+        .container { max-width: 1140px; margin: 0 auto; width: 100%; }
+
+        #hero { background-color: var(--white-smoke); padding-top: 160px; padding-bottom: 120px; }
+        #probleme { background-color: var(--alabaster-grey-2); }
+        #solution { background-color: var(--white-smoke); }
+        #comment-ca-marche { background-color: var(--carbon-black); color: #ffffff; }
+        #equipe { background-color: var(--white-smoke); }
+        #cta-section { background-color: var(--onyx); color: #ffffff; text-align: center; padding: 120px 24px; }
+
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            z-index: 1000; padding: 15px 24px;
+        }
+
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+
+        .logo img { height: 40px; display: block; }
+
+        .nav-links { display: flex; align-items: center; list-style: none; gap: 32px; }
+
+        .nav-links a { text-decoration: none; color: var(--onyx); font-weight: 500; font-size: 14px; transition: color 0.2s ease; }
+        .nav-links a:hover { color: var(--grey-olive); }
+
+        .btn { display: inline-block; padding: 12px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease; cursor: pointer; border: none; font-size: 15px; font-family: var(--font-main); }
+        .btn-primary { background-color: var(--onyx); color: #ffffff; }
+        .btn-primary:hover { background-color: var(--carbon-black); transform: translateY(-1px); }
+        .btn-lime { background-color: var(--lime-green); color: var(--onyx); }
+        .btn-lime:hover { box-shadow: 0 4px 15px rgba(198, 241, 53, 0.4); transform: translateY(-1px); }
+        .btn-dark-lime { background-color: var(--onyx); color: var(--lime-green); }
+        .btn-dark-lime:hover { background-color: var(--carbon-black); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); transform: translateY(-1px); }
+
+        .burger-menu { display: none; cursor: pointer; flex-direction: column; gap: 6px; border: none; background: none; padding: 4px; }
+        .burger-menu span { display: block; width: 25px; height: 3px; background-color: var(--onyx); border-radius: 2px; transition: 0.3s; }
+
+        .hero-content { text-align: center; max-width: 950px; margin: 0 auto; }
+        .hero-tag { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--grey-olive); margin-bottom: 16px; }
+        #hero h1 { font-size: 48px; font-weight: 800; line-height: 1.25; color: var(--onyx); margin-bottom: 24px; letter-spacing: -1px; }
+        .highlight-lime { background-color: var(--lime-green); padding: 2px 8px; border-radius: 4px; display: inline-block; }
+        .hero-subtitle { font-size: 20px; color: var(--carbon-black); margin-bottom: 40px; font-weight: 400; }
+        .hero-subtitle strong { font-weight: 600; }
+
+        .section-title { font-size: 32px; font-weight: 700; margin-bottom: 48px; text-align: center; }
+        .section-logo { height: 50px; display: block; margin: 0 auto 48px; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .card-prob { background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+        .card-prob h3 { font-size: 18px; color: var(--grey-olive); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+        .big-number { font-size: 56px; font-weight: 800; color: var(--onyx); line-height: 1.1; margin-bottom: 15px; display: block; }
+        .number-label { font-size: 28px; font-weight: 700; color: var(--onyx); display: block; margin-top: -5px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: -0.5px; }
+        .card-prob p { font-size: 16px; color: var(--carbon-black); }
+
+        .promesse-box { background-color: var(--onyx); color: #ffffff; padding: 24px 40px; border-radius: 16px; position: relative; overflow: hidden; margin-top: 40px; }
+        .promesse-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+        .promesse-item h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; color: var(--lime-green); }
+        .promesse-item p { font-size: 14px; color: #ffffff; line-height: 1.5; }
+
+        .solution-intro { text-align: center; max-width: 800px; margin: 0 auto 50px auto; font-size: 18px; color: var(--carbon-black); }
+        .solution-bridge { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .sol-block { background: #ffffff; padding: 40px; border-radius: 16px; border: 1px solid var(--alabaster-grey-1); }
+        .sol-block h3 { font-size: 22px; font-weight: 700; margin-bottom: 20px; color: var(--onyx); border-bottom: 3px solid var(--lime-green); padding-bottom: 10px; display: inline-block; }
+        .sol-list { list-style: none; }
+        .sol-list li { position: relative; padding-left: 28px; margin-bottom: 14px; font-size: 15px; }
+        .sol-list li::before { content: "✓"; position: absolute; left: 0; color: var(--lime-green); font-weight: bold; background: var(--onyx); width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; top: 2px; }
+
+        .timeline { position: relative; max-width: 900px; margin: 60px auto 0 auto; padding: 20px 0; }
+        .timeline::before { content: ''; position: absolute; width: 2px; background-color: rgba(255,255,255,0.1); top: 0; bottom: 0; left: 50%; margin-left: -1px; }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
+        .timeline-item::after { content: ''; position: absolute; width: 16px; height: 16px; right: -8px; background-color: var(--lime-green); top: 25px; border-radius: 50%; z-index: 1; }
+        .left { left: 0; text-align: right; }
+        .right { left: 50%; text-align: left; }
+        .right::after { left: -8px; }
+        .timeline-content { padding: 20px 30px; background-color: var(--carbon-black); position: relative; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        .timeline-number { font-size: 24px; font-weight: 800; color: var(--lime-green); margin-bottom: 5px; display: block; }
+        .timeline-content h3 { font-size: 18px; margin-bottom: 10px; font-weight: 600; color: #ffffff; }
+        .timeline-content p { font-size: 14px; color: var(--grey-olive); }
+        .engagement-box { max-width: 600px; margin: 50px auto 0 auto; background: rgba(198, 241, 53, 0.08); border: 1px dashed var(--lime-green); padding: 24px; border-radius: 12px; text-align: center; }
+        .engagement-box p { font-size: 15px; color: #ffffff; }
+        .engagement-box strong { color: var(--lime-green); }
+
+        .team-subtitle { text-align: center; color: var(--grey-olive); margin-top: -35px; margin-bottom: 50px; font-size: 16px; }
+        .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .team-member { background: #ffffff; padding: 40px; border-radius: 16px; display: flex; align-items: center; gap: 30px; border: 1px solid var(--alabaster-grey-2); }
+        .team-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background-color: var(--alabaster-grey-1); }
+        .team-info h3 { font-size: 20px; font-weight: 700; color: var(--onyx); }
+        .team-role { font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--grey-olive); letter-spacing: 1px; margin-bottom: 12px; display: block; }
+        .team-bio { font-size: 14px; color: var(--carbon-black); line-height: 1.5; }
+
+        footer { background-color: var(--onyx); padding: 40px 24px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--grey-olive); font-size: 14px; }
+        .footer-container { max-width: 1140px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .footer-left { text-align: left; }
+        .footer-right { text-align: right; }
+
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(17, 17, 17, 0.8); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .modal.active { opacity: 1; pointer-events: auto; }
+        .modal-content { background: #ffffff; padding: 40px; border-radius: 16px; width: 100%; max-width: 500px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.3); color: var(--onyx); }
+        .modal-close { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--grey-olive); }
+        .modal h3 { font-size: 24px; margin-bottom: 8px; font-weight: 700; }
+        .modal p { font-size: 14px; color: var(--grey-olive); margin-bottom: 24px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+        .form-control { width: 100%; padding: 12px; border: 1px solid var(--alabaster-grey-1); border-radius: 6px; font-family: var(--font-main); font-size: 14px; }
+        .form-control:focus { outline: none; border-color: var(--onyx); }
+
+        @media (max-width: 992px) {
+            .grid-2, .solution-bridge, .team-grid { grid-template-columns: 1fr; gap: 30px; }
+            .promesse-grid { grid-template-columns: 1fr; gap: 20px; }
+            .timeline::before { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 0; text-align: left; }
+            .left, .right { left: 0; text-align: left; }
+            .timeline-item::after { left: 23px; right: auto; }
+        }
+
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 34px; }
+            .nav-links { display: none; position: absolute; top: 70px; left: 0; width: 100%; background: #ffffff; flex-direction: column; padding: 24px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); gap: 16px; }
+            .nav-links.active { display: flex; }
+            .burger-menu { display: flex; }
+            .team-member { flex-direction: column; text-align: center; }
+            .footer-container { flex-direction: column; gap: 12px; text-align: center; }
+            .footer-left, .footer-right { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#hero" class="logo">
+                <img src="SQLKS -logo_alignS.png" alt="SquareLinks Logo" onerror="this.src='https://via.placeholder.com/180x40?text=SquareLinks'">
+            </a>
+
+            <button class="burger-menu" id="burgerToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#probleme">Le problème</a></li>
+                <li><a href="#solution">La solution</a></li>
+                <li><a href="#comment-ca-marche">Comment ça marche</a></li>
+                <li><a href="#equipe">L'équipe</a></li>
+                <li><button class="btn btn-dark-lime open-modal">Nous contacter</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-tag">data · IA · Digital</div>
+                <h1>Promoteurs, <span class="highlight-lime">accélérez vos fins de programmes !</span></h1>
+                <p class="hero-subtitle">SquareLinks connecte automatiquement vos lots invendus aux meilleurs mandataires locaux <strong>en 5 étapes, sans friction.</strong></p>
+                <button class="btn btn-dark-lime open-modal">Demander une démo</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="probleme">
+        <div class="container">
+            <h2 class="section-title">Le Constat du Marché</h2>
+            <div class="grid-2">
+                <div class="card-prob">
+                    <h3>Côté Promoteur</h3>
+                    <span class="big-number">+ 8 000</span>
+                    <span class="number-label">appartements</span>
+                    <p>neufs sont actuellement livrés mais restés invendus. Un capital immobilisé, des bilans pénalisés, et des coûts qui s'accumulent mois après mois.</p>
+                </div>
+                <div class="card-prob">
+                    <h3>Côté Mandataire</h3>
+                    <span class="big-number">40 000</span>
+                    <span class="number-label">professionnels</span>
+                    <p>sont en quête permanente de mandats et disposent d'une base de clients acheteurs actifs, sous-exploitée faute d'accès aux bons programmes.</p>
+                </div>
+            </div>
+
+            <div class="promesse-box">
+                <div class="promesse-grid">
+                    <div class="promesse-item">
+                        <h4>Promoteurs</h4>
+                        <p>Réduisez vos coûts et activez efficacement de nouveaux partenaires locaux de confiance.</p>
+                    </div>
+                    <div class="promesse-item">
+                        <h4>Mandataires</h4>
+                        <p>Enrichissez votre offre de biens et générez rapidement des revenus complémentaires.</p>
+                    </div>
+                    <div class="promesse-item">
+                        <h4>Acheteurs</h4>
+                        <p>Accédez beaucoup plus simplement à l'ensemble des biens neufs immédiatement disponibles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solution">
+        <div class="container">
+            <img src="SQLKS -logo_alignS.png" alt="SquareLinks Logo" class="section-logo" onerror="this.src='https://via.placeholder.com/180x40?text=SquareLinks'">
+
+            <p class="solution-intro">SquareLinks vous apporte un outil clé en main pour sélectionner et recruter vos futurs mandataires vendeurs. C'est la réunion unique d'une base exclusive et d'un outil propriétaire de prospection.</p>
+
+            <div class="solution-bridge">
+                <div class="sol-block">
+                    <h3>Base mandataire exclusive</h3>
+                    <ul class="sol-list">
+                        <li><strong>40 000 conseillers</strong> référencés, vérifiés RSAC et carte professionnelle</li>
+                        <li><strong>Géolocalisation</strong> fine adaptée au programme ciblé</li>
+                        <li>Analyse du <strong>volume d'activité réel</strong> des mandataires</li>
+                        <li>Évaluation des <strong>avis et notoriété locale</strong></li>
+                        <li>Identification des structures manager et tête de lignée</li>
+                    </ul>
+                </div>
+                <div class="sol-block">
+                    <h3>Outil propriétaire de prospection</h3>
+                    <ul class="sol-list">
+                        <li>Ciblez, activez et recrutez les bons mandataires autour de chaque programme</li>
+                        <li>Diffusion par campagnes ultra-ciblées <strong>SMS, e-mail ou WhatsApp</strong></li>
+                        <li><strong>Recueil centralisé</strong> des candidatures au sein de la plateforme</li>
+                        <li>Gestion automatisée des <strong>dossiers KYC</strong> et des pièces justificatives</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="comment-ca-marche">
+        <div class="container">
+            <h2 class="section-title">Comment ça marche ?</h2>
+
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="timeline-number">01</span>
+                        <h3>Vous nous fournissez vos lots</h3>
+                        <p>Importation simple via fichier Excel/XLS ou gestion en totale autonomie.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <span class="timeline-number">02</span>
+                        <h3>Vitrine IA</h3>
+                        <p>Génération automatique de landing pages dédiées et de fiches biens hautement attractives.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="timeline-number">03</span>
+                        <h3>Segmentation</h3>
+                        <p>Ciblage chirurgical et précis des mandataires les plus pertinents autour de votre programme.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <span class="timeline-number">04</span>
+                        <h3>Recrutement</h3>
+                        <p>Activation multicanale intelligente (Mail, SMS et agent conversationnel IA).</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="timeline-number">05</span>
+                        <h3>Sélection</h3>
+                        <p>Choisissez facilement vos mandataires depuis une short-list qualifiée et motivée.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="engagement-box">
+                <p><strong>Engagement SquareLinks :</strong> Un minimum de 3 mandataires livrés par campagne - engagement contractuel ferme à chaque lancement de programme.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipe">
+        <div class="container">
+            <h2 class="section-title">L'Équipe</h2>
+            <p class="team-subtitle">Un duo technologie &amp; immobilier · Deux experts qui ont conçu SquareLinks de l'intérieur du marché.</p>
+
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="Philippe-rond.jpg" alt="Philippe de Lignivill" class="team-img" onerror="this.src='https://via.placeholder.com/120?text=Philippe'">
+                    <div class="team-info">
+                        <h3>Philippe de Lignivill</h3>
+                        <span class="team-role">Proptech &amp; Digital</span>
+                        <p class="team-bio">Ex-DGA de Bien'ici. Expert reconnu en innovation commerciale et rentabilité B2B, spécialisé dans la croissance stratégique des acteurs proptech.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="Ludo-rond.jpg" alt="Ludovic Paire" class="team-img" onerror="this.src='https://via.placeholder.com/120?text=Ludovic'">
+                    <div class="team-info">
+                        <h3>Ludovic Paire</h3>
+                        <span class="team-role">IA &amp; Automatisation</span>
+                        <p class="team-bio">Architecte technique IA, fondateur de Battle Royale. Vingt ans d'expérience pointue en marketing digital, processus automatisés et certifié Airtable.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta-section">
+        <div class="container">
+            <h2 style="margin-bottom: 20px;">Prêt à accélérer vos ventes de fin de programme ?</h2>
+            <p style="margin-bottom: 40px;">Envoyez-nous vos lots, on s'occupe du reste !</p>
+            <button class="btn btn-lime open-modal" style="font-size: 16px; padding: 16px 36px;">Lancer une campagne</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                 © 2025 SquareLinks · Tous droits réservés.
+            </div>
+            <div class="footer-right">
+                <a href="mailto:contact@squarelinks.immo" style="color: inherit; text-decoration: none; font-weight: 500;">contact@squarelinks.immo</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h3>Demander une démo</h3>
+            <p>Remplissez ce formulaire et l'équipe SquareLinks vous recontactera sous 24h.</p>
+            <form onsubmit="event.preventDefault(); alert('Merci ! Votre demande a bien été envoyée à contact@squarelinks.immo.'); document.getElementById('contactModal').classList.remove('active');">
+                <div class="form-group">
+                    <label for="name">Nom / Entreprise</label>
+                    <input type="text" id="name" class="form-control" placeholder="Ex: Jean Dupont - Nexity" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Adresse e-mail</label>
+                    <input type="email" id="email" class="form-control" placeholder="jean.dupont@promoteur.fr" required>
+                </div>
+                <div class="form-group">
+                    <label for="lots">Nombre de lots invendus estimé</label>
+                    <input type="number" id="lots" class="form-control" placeholder="Ex: 5">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Envoyer ma demande</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const burgerToggle = document.getElementById('burgerToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        burgerToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        const modal = document.getElementById('contactModal');
+        const openModalButtons = document.querySelectorAll('.open-modal');
+        const closeModalButton = document.getElementById('closeModal');
+
+        openModalButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modal.classList.add('active');
+            });
+        });
+
+        closeModalButton.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
