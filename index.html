@@ -410,13 +410,12 @@
         });
 
         const modal = document.getElementById('contactModal');
-        const openModalButtons = document.querySelectorAll('.open-modal');
         const closeModalButton = document.getElementById('closeModal');
 
-        openModalButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.open-modal')) {
                 modal.classList.add('active');
-            });
+            }
         });
 
         closeModalButton.addEventListener('click', () => {
