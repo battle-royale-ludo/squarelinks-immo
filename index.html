@@ -138,6 +138,8 @@
         .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
         .form-control { width: 100%; padding: 12px; border: 1px solid var(--alabaster-grey-1); border-radius: 6px; font-family: var(--font-main); font-size: 14px; }
         .form-control:focus { outline: none; border-color: var(--onyx); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+        .form-row .form-group { margin-bottom: 0; }
 
         @media (max-width: 992px) {
             .grid-2, .solution-bridge, .team-grid { grid-template-columns: 1fr; gap: 30px; }
@@ -360,13 +362,29 @@
             <h3>Demander une démo</h3>
             <p>Remplissez ce formulaire et l'équipe SquareLinks vous recontactera sous 24h.</p>
             <form onsubmit="event.preventDefault(); alert('Merci ! Votre demande a bien été envoyée à contact@squarelinks.immo.'); document.getElementById('contactModal').classList.remove('active');">
-                <div class="form-group">
-                    <label for="name">Nom / Entreprise</label>
-                    <input type="text" id="name" class="form-control" placeholder="Ex: Jean Dupont - Nexity" required>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" id="prenom" class="form-control" placeholder="Jean" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" class="form-control" placeholder="Dupont" required>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="email">Adresse e-mail</label>
-                    <input type="email" id="email" class="form-control" placeholder="jean.dupont@promoteur.fr" required>
+                    <label for="entreprise">Entreprise</label>
+                    <input type="text" id="entreprise" class="form-control" placeholder="Ex: Nexity" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" class="form-control" placeholder="jean.dupont@promoteur.fr" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Téléphone</label>
+                        <input type="tel" id="telephone" class="form-control" placeholder="06 00 00 00 00">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="lots">Nombre de lots invendus estimé</label>
